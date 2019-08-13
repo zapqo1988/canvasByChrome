@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>use video：</p>
+<video width="500" height="300" controls id="videoid" onloadeddata="preImage()">
+    <source src="https://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4" type="video/mp4">
+</video>
+
+<p>not set timeout canvas:</p>
+<canvas id="myCanvasNormal" width="500" height="300">
+</canvas>
+
+<p>set timetout canvas:</p>
+<canvas id="myCanvasBySetTimeOut" width="500" height="300">
+</canvas>
+
+<script>
+
+function preImage()
+{
+	// if not set timeout, chrome generate black canvas; But it's normal to generate canvas by not use the lastest chrome76 webkit browsers or lower than chrome76 webkit browsers;
+	generateCanvas('myCanvasNormal');
+	// if set timeout 100+, it's normal to generate canvas by chrome
+	setTimeout(function(){generateCanvas('myCanvasBySetTimeOut')}, 500);
+}
+
+
+function generateCanvas(id)
+{
+	var c   = document.getElementById(id);
+	var ctx = c.getContext("2d");
+	var v   = document.getElementById("videoid");
+	ctx.drawImage(v, 0 , 0, 500, 300);
+}
+</script>
+
+</body>
+</html>
